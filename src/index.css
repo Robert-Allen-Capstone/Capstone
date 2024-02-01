@@ -13,11 +13,11 @@ body {
 /* Add your own custom styles here */
 /* products style  */
 .product-container {
-display: flex;
-flex-wrap: wrap;
-/* align-items: center; */
-justify-content: center;
-gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .product-info {
@@ -81,3 +81,62 @@ gap: 8px;
 .product-add-button:active {
   transform: translateY(2px);
 }
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid brown;
+  padding: 0 17%;
+}
+   
+
+
+.categories-electronics:hover {
+  background-color: red;
+}
+
+.cart-length {
+  position: absolute;
+  right: 0;
+  top: -30px; 
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  border-radius: 11px;
+  font-size: 14px;
+  background: red;
+  color: white;
+}
+
+ .total-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+ }
+
+ .checkout-button {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+ }
+  .checkout-form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    border: 2px solid black;
+    gap: 8px;
+  }
+
+  

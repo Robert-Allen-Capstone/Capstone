@@ -1,9 +1,10 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { getSingleProduct } from "../API";
 import { useNavigate, useParams } from "react-router-dom";
 
 
-export default function Product () {
+export default function Product ({ setCart }) {
     const [ product, setProduct ] = useState([]);
     const navigate = useNavigate();
     const params = useParams();
@@ -22,6 +23,33 @@ export default function Product () {
         fetchProduct();
     }, []);
 
+        // function formatPrice(price) {
+        //     console.log("price", price);
+        //     console.log("singleProduct", singleProduct);
+        //     if (singleProduct) {
+        //         const roundedPrice = price.toFixed(2);
+        //         return roundedPrice;
+        //     }
+        // }
+
+        function addItemToCart() {
+            let cartInStorage = JSON.parse(localStorage.getItem("cart"));
+            if (!cartInStorage) cartInStorage = [];
+            const result = cartInStorage.find((item) => item.id == params.id);
+            if (!result) {
+                cartInStorage.push({ ...product, quantity: 1 }); 
+                localStorage.setItem("cart", JSON.stringify(cartInStorage));
+            } else {
+                result.quantity += 1;
+                const updatedCart = cartInStorage.filter((item) => item.id != params.id);
+                updatedCart.push(result);
+                localStorage.setItem("cart", JSON.stringify(updatedCart));
+            }   
+            const nextCart = JSON.parse(localStorage.getItem("cart"));
+            setCart(nextCart);
+            }
+        
+
 
                 return ( product &&
                     <div className="product-single" onClick={() => navigate(`/products/${product.id}`)}>
@@ -31,10 +59,11 @@ export default function Product () {
                         <p>Description: {product.description}</p>
                         <p>Id: {product.id}</p>
                         <p>Price: {product.price}</p>
-                        <button className="product-add-button">Add to Cart</button>
+                        <button onClick={addItemToCart}>Add to Cart</button>
 
                     </div>
-                )
-         
-
+                );
 }
+    
+     
+

@@ -20,6 +20,12 @@ export default function Login ({ setToken, setUser }) {
         const user = users.filter(_user => {
             return _user.username === username;
         }) [0]
+
+        console.log(user)
+
+        localStorage.setItem("username", JSON.stringify(user))
+        localStorage.setItem("token", JSON.stringify(nextToken))
+    
         setUser(user);
         setToken(nextToken);
         navigate("/account");

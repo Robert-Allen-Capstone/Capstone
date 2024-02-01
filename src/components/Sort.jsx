@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
+import React from "react";
 import { getProducts } from "../API";
 import { useNavigate } from "react-router-dom";
+import { getProductAscending } from "../API";
+import { getProductDescending } from "../API";
 
-
-export default function Products ({products, setProducts, fetchProducts}) {
+export default function Sort ({products, setProducts }) {
     // const [ products, setProducts ] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        
-        
-        fetchProducts();
+        async function fetchProductDescending() {
+            try {
+                const products = await getProductDescending();
+                setProducts(products);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchProductDescending();
     }, []);
 
     return (
@@ -28,7 +36,7 @@ export default function Products ({products, setProducts, fetchProducts}) {
                         <p>Description: {product.description}</p>
                         <p>Id: {product.id}</p>
                         <p>Price: {product.price}</p>
-                        <button className="product-add-button">See Details</button>
+                        <button className="product-add-button">Add to Cart</button>
 
                         </div>
 
@@ -37,6 +45,4 @@ export default function Products ({products, setProducts, fetchProducts}) {
             })}
         </div>
     );
-
-
-}
+        }
